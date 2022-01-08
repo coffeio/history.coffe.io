@@ -1,5 +1,5 @@
 {
-  "name": "hyperion-history",
+  "name": "history.coffe.io",
   "version": "3.1.4",
   "description": "Scalable Full History API Solution for EOSIO based blockchains",
   "main": "launcher.js",
@@ -18,7 +18,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/eosrio/Hyperion-History-API.git"
+    "url": "https://github.com/coffeio/history.coffe.io.git"
   },
   "license": "MIT",
   "dependencies": {

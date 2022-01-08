@@ -39,7 +39,7 @@ export class ConnectionManager {
     async purgeQueues() {
         hLog(`Purging all ${this.chain} queues!`);
         const apiUrl = `http://${this.conn.amqp.api}`;
-        const getAllQueuesFromVHost = apiUrl + `/api/queues/%2F${this.conn.amqp.vhost}`;
+        const getAllQueuesFromVHost = apiUrl + `/api/queues/${this.conn.amqp.vhost}`;
         const opts = {
             username: this.conn.amqp.user,
             password: this.conn.amqp.pass
@@ -52,8 +52,8 @@ export class ConnectionManager {
             }
         } catch (e) {
             console.log(e.message);
-            console.error('failed to connect to rabbitmq http api');
-            process.exit(1);
+            console.error('[-->] failed to connect to rabbitmq http api');
+            //process.exit(1);
         }
         if (result) {
             for (const queue of result) {
@@ -61,12 +61,12 @@ export class ConnectionManager {
                     const msg_count = parseInt(queue.messages);
                     if (msg_count > 0) {
                         try {
-                            await got.delete(apiUrl + `/api/queues/%2F${this.conn.amqp.vhost}/${queue.name}/contents`, opts);
+                            await got.delete(apiUrl + `/api/queues/${this.conn.amqp.vhost}/${queue.name}/contents`, opts);
                             hLog(`${queue.messages} messages deleted on queue ${queue.name}`);
                         } catch (e) {
                             console.log(e.message);
-                            console.error('failed to connect to rabbitmq http api');
-                            process.exit(1);
+                            console.error('[-->] failed to connect to rabbitmq http api');
+                            //process.exit(1);
                         }
                     }
                 }
